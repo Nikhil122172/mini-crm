@@ -42,7 +42,7 @@ export default function Campaigns() {
         message,
         segmentId: selectedSegment,
         // userId: 'currentUserId', // replace with actual user id from auth context
-        userId: '68384a0eb4c722b8441a027c'
+        userId: process.env.ID
       });
       setCampaignName('');
       setMessage('');
