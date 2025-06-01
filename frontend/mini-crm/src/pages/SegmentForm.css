@@ -1,0 +1,62 @@
+.segment-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.segment-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.segment-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.segment-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.segment-form input,
+.segment-form select,
+.segment-form button {
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.rule-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="button"] {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.success-msg {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+}
