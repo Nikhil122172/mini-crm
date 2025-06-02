@@ -74,3 +74,24 @@
   margin-bottom: 8px;
   font-weight: 600;
 }
+
+
+.message-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.btn.secondary {
+  margin-top: 0.5rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn.secondary:hover {
+  background-color: #4f46e5;
+}

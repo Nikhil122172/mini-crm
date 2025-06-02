@@ -66,19 +66,19 @@ router.post('/', async (req, res) => {
     // Simulate message sending and save communication logs
     console.log(customers);
     
-    // for (const customer of customers) {
-    //   const personalizedMessage = message.replace("{{name}}", customer.name);
-    //   const success = Math.random() < 0.9;  // 90% success rate
+    for (const customer of customers) {
+      const personalizedMessage = message.replace("{{name}}", customer.name);
+      const success = Math.random() < 0.9;  // 90% success rate
 
-    //   await CommunicationLog.create({
-    //     campaignId: campaign._id,
-    //     customerId: customer._id,
-    //     message: personalizedMessage,
-    //     status: success ? 'SENT' : 'FAILED'
-    //   });
+      await CommunicationLog.create({
+        campaignId: campaign._id,
+        customerId: customer._id,
+        message: personalizedMessage,
+        status: success ? 'SENT' : 'FAILED'
+      });
 
-    //   if(success) sentCount++; else failedCount++;
-    // }
+      if(success) sentCount++; else failedCount++;
+    }
 
     for (const customer of customers) {
       if (customer.phone) {

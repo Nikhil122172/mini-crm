@@ -1,0 +1,54 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #f5f7fa;
+  padding: 2rem;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  text-align: center;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-button {
+  background: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.home-button:hover {
+  background: #0056b3;
+}
+
+.profile-img {
+  width: 112px;          /* same as Tailwind w-28 */
+  height: 112px;         /* same as Tailwind h-28 */
+  border-radius: 50%;    /* makes it circular */
+  border: 3px solid #556782; /* blue border (#3b82f6 is Tailwind blue-500) */
+  object-fit: cover;     /* cover to fill the container */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* subtle shadow */
+  display: block;
+  margin: 0 auto 1.25rem; /* center horizontally and margin-bottom */
+}

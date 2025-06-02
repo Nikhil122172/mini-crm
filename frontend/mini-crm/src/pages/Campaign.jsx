@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Campaigns.css';
+import React from 'react';
+// const { user } = useAuth();
+// import { useAuth } from '../components/AuthContext'; // adjust path
+// const { user } = useAuth();
+
 
 export default function Campaigns() {
   const [segments, setSegments] = useState([]);
@@ -8,6 +13,19 @@ export default function Campaigns() {
   const [message, setMessage] = useState('');
   const [selectedSegment, setSelectedSegment] = useState('');
   const [campaigns, setCampaigns] = useState([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const [user, setUser] = useState(null);
+
+useEffect(() => {
+  axios.get('http://localhost:5000/api/me', { withCredentials: true })
+    .then(res => {
+      setUser(res.data);
+    })
+    .catch(err => {
+      console.error('User not authenticated', err);
+    });
+}, []);
 
   useEffect(() => {
     fetchSegments();
@@ -17,6 +35,8 @@ export default function Campaigns() {
   const fetchSegments = async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/segments');
+      // console.log(res.data);
+      
       setSegments(res.data);
     } catch (err) {
       console.error('Failed to fetch segments:', err);
@@ -37,12 +57,13 @@ export default function Campaigns() {
     if (!campaignName || !message || !selectedSegment) return alert('Please fill all fields.');
 
     try {
+      console.log(user.uid);
       await axios.post('http://localhost:5000/api/campaigns', {
         name: campaignName,
         message,
         segmentId: selectedSegment,
         // userId: 'currentUserId', // replace with actual user id from auth context
-        userId: process.env.ID
+        userId: user._id
       });
       setCampaignName('');
       setMessage('');
@@ -52,6 +73,26 @@ export default function Campaigns() {
       console.error('Failed to launch campaign:', err);
     }
   };
+
+  const handleGenerateMessage = async () => {
+  if (!campaignName || !selectedSegment) {
+    alert("Please enter a campaign name and select a segment before generating a message.");
+    return;
+  }
+  setIsGenerating(true);
+  try {
+    const res = await axios.post('http://localhost:5000/api/generate', {
+      name: campaignName
+    });
+    setMessage(res.data.message);
+  } catch (err) {
+    console.error("AI message generation failed:", err);
+    alert("Failed to generate message.");
+  } finally {
+    setIsGenerating(false);
+  }
+};
+
 
   return (
     <div className="container">
@@ -74,6 +115,16 @@ export default function Campaigns() {
           required
           rows={4}
         />
+  <button
+    type="button"
+    className="btn secondary"
+    onClick={handleGenerateMessage}
+    disabled={isGenerating}
+  >
+    {isGenerating ? "Generating..." : "✨ Generate with AI"}
+  </button>
+
+
         <select
           value={selectedSegment}
           onChange={(e) => setSelectedSegment(e.target.value)}

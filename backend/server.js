@@ -16,20 +16,38 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User'); 
 const isCustomer = require('./middlewares/isCustomer');
+const aiRoute = require('./routes/ai.js');
+// import aiRoute from './routes/ai.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // ✅ specify your frontend origin
+  credentials: true                // ✅ allow cookies and credentials
+}));
+
 app.use(express.json());
 
 
 
 
+// app.use(session({
+//   secret: 'your_secret_key',  // isse replace kar dena kuch strong se
+//   resave: false,
+//   saveUninitialized: false,
+// }));
+
 app.use(session({
-  secret: 'your_secret_key',  // isse replace kar dena kuch strong se
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: false, // set to true if using https
+    httpOnly: true,
+    sameSite: 'lax'
+  }
 }));
 
 app.use(passport.initialize());
@@ -92,20 +110,36 @@ passport.use(new GoogleStrategy({
 
 
 
+// app.use((req, res, next) => {
+//   console.log('Session data:', req.session);
+//   console.log('Authenticated:', req.isAuthenticated());
+//   console.log('User:', req.user);
+//   next();
+// });
+
 
 // Routes
 
 // 1. Login route (redirects to Google login page)
 app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
+  passport.authenticate('google', { scope: ['profile', 'email'],prompt: 'select_account',
+    accessType: 'offline', }));
 
 // 2. Callback route (Google redirects here after login)
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login-failure' }),
   function(req, res) {
     // Successful login, redirect where chahiye
-    res.redirect('/dashboard');
+    // res.redirect('http://localhost:5173/');
+    res.redirect('http://localhost:5173/login-success');
   });
+
+  app.get('/api/me', (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.json(req.user);
+  }
+  res.status(401).json({ error: 'Not logged in' });
+});
 
 // 3. Logout route
 app.get('/logout', (req, res) => {
@@ -136,6 +170,8 @@ app.use('/api/segments', segmentRoutes);
 
 // app.use('/api/campaigns', campaignRoutes);
 app.use('/api/campaigns', require('./routes/campaignRoutes'));
+
+app.use('/api', aiRoute);
 
 
 // MongoDB connection
