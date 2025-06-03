@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:5173', // ✅ specify your frontend origin
+  origin: 'https://mini-crm-edgj.onrender.com', // ✅ specify your frontend origin
   credentials: true                // ✅ allow cookies and credentials
 }));
 
@@ -40,7 +40,7 @@ app.use(express.json());
 // }));
 
 app.use(session({
-  secret: process.env.SECRET,
+  secret: process.env.SESSION_SECRET || 'defaultSecretForDevOnly',
   resave: false,
   saveUninitialized: false,
   cookie: {
