@@ -23,13 +23,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // app.use(cors());
+app.set('trust proxy', 1);
+
 app.use(cors({
   origin: 'https://mini-crm-edgj.onrender.com', // ✅ specify your frontend origin
   credentials: true                // ✅ allow cookies and credentials
 }));
 
 app.use(express.json());
-app.set('trust proxy', 1);
+
 
 
 
