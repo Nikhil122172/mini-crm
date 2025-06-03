@@ -38,6 +38,7 @@ function App() {
 
   if (loading) return <h2>Loading...</h2>; // don't render routes yet
 
+  console.log("user 2->",user);
   
   return (
     <BrowserRouter>
