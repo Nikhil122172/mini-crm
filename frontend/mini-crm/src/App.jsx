@@ -51,18 +51,9 @@ function App() {
       </nav>
 
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/customers" element={<Customers />} />
-        {/* <Route path="/customers" element={ <ProtectedRoute>
-        <Customers />
-      </ProtectedRoute>} /> */}
-
-
-        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/customers" element={user?<Customers />:<Navigate to="/login" />} />
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />}/>
-{/* <Route path="/login" element={<Login />} /> */}
-<Route path="/dashboard" element={user ? <DashBoard /> : <Navigate to="/login" />} />
-
+        <Route path="/dashboard" element={user ? <DashBoard /> : <Navigate to="/login" />} />
         <Route path="/orders" element={user ? <OrdersPage /> :<Navigate to="/login" />} />
         <Route path="/segments" element={user ? <SegmentForm /> : <Navigate to="/login" />} />
         <Route path="/campaigns" element={user ? <Campaigns />:<Navigate to="/login" />} />
