@@ -31,4 +31,3 @@ router.post('/generate', async (req, res) => {
 module.exports = router;
 
 
-routes/ai.js
