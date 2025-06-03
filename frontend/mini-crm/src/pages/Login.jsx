@@ -8,7 +8,7 @@ export default function Login() {
       <div className="login-box">
         <h2 className="login-title">Welcome to Xeno CRM</h2>
         <p className="login-subtitle">Login with your Google account</p>
-        <a href="http://localhost:5000/auth/google" className="google-btn">
+        <a href="https://mini-crmb.onrender.com/auth/google" className="google-btn">
           <img
             src="https://developers.google.com/identity/images/g-logo.png"
             alt="Google Logo"

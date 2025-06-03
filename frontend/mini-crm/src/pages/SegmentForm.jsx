@@ -28,7 +28,7 @@ const SegmentForm = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/segments', {
+      const res = await fetch('https://mini-crmb.onrender.com/api/segments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -49,7 +49,7 @@ const SegmentForm = () => {
 
 const handlePreview = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/segments/preview', {
+    const res = await fetch('https://mini-crmb.onrender.com/api/segments/preview', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ rules }),

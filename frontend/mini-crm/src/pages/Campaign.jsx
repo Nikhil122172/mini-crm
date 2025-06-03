@@ -18,7 +18,7 @@ export default function Campaigns() {
   const [user, setUser] = useState(null);
 
 useEffect(() => {
-  axios.get('http://localhost:5000/api/me', { withCredentials: true })
+  axios.get('https://mini-crmb.onrender.com/api/me', { withCredentials: true })
     .then(res => {
       setUser(res.data);
     })
@@ -34,7 +34,7 @@ useEffect(() => {
 
   const fetchSegments = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/segments');
+      const res = await axios.get('https://mini-crmb.onrender.com/api/segments');
       // console.log(res.data);
       
       setSegments(res.data);
@@ -45,7 +45,7 @@ useEffect(() => {
 
   const fetchCampaigns = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/campaigns');
+      const res = await axios.get('https://mini-crmb.onrender.com/api/campaigns');
       setCampaigns(res.data);
     } catch (err) {
       console.error('Failed to fetch campaigns:', err);
@@ -58,7 +58,7 @@ useEffect(() => {
 
     try {
       console.log(user.uid);
-      await axios.post('http://localhost:5000/api/campaigns', {
+      await axios.post('https://mini-crmb.onrender.com/api/campaigns', {
         name: campaignName,
         message,
         segmentId: selectedSegment,
@@ -81,7 +81,7 @@ useEffect(() => {
   }
   setIsGenerating(true);
   try {
-    const res = await axios.post('http://localhost:5000/api/generate', {
+    const res = await axios.post('https://mini-crmb.onrender.com/api/generate', {
       name: campaignName
     });
     setMessage(res.data.message);

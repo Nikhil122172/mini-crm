@@ -18,7 +18,7 @@ const [editingCustomerId, setEditingCustomerId] = useState(null);
 
 
   const fetchCustomers = async () => {
-    const res = await axios.get('http://localhost:5000/api/customers');
+    const res = await axios.get('https://mini-crmb.onrender.com/api/customers');
     setCustomers(res.data);
   };
 
@@ -29,14 +29,14 @@ const [editingCustomerId, setEditingCustomerId] = useState(null);
 const handleSubmit = async () => {
   if (editingCustomerId) {
     // Editing mode
-    await axios.put(`http://localhost:5000/api/customers/${editingCustomerId}`, {
+    await axios.put(`https://mini-crmb.onrender.com/api/customers/${editingCustomerId}`, {
       ...newCustomer,
       totalSpend: Number(newCustomer.totalSpend),
       visits: Number(newCustomer.visits),
     });
   } else {
     // Adding mode
-    await axios.post('http://localhost:5000/api/customers', {
+    await axios.post('https://mini-crmb.onrender.com/api/customers', {
       ...newCustomer,
       totalSpend: Number(newCustomer.totalSpend),
       visits: Number(newCustomer.visits),
@@ -50,7 +50,7 @@ const handleSubmit = async () => {
 
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/customers/${id}`);
+    await axios.delete(`https://mini-crmb.onrender.com/api/customers/${id}`);
     fetchCustomers();
   };
 

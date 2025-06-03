@@ -38,7 +38,7 @@ const OrdersPage = () => {
   // Fetch all orders
   const fetchOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/orders');
+      const res = await axios.get('https://mini-crmb.onrender.com/api/orders');
       setOrders(res.data);
       setFilteredOrders(res.data);
     } catch (err) {
@@ -49,7 +49,7 @@ const OrdersPage = () => {
   // Fetch customers for dropdown
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/customers');
+      const res = await axios.get('https://mini-crmb.onrender.com/api/customers');
       setCustomers(res.data);
     } catch (err) {
       console.error(err);
@@ -95,7 +95,7 @@ const OrdersPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/orders', newOrder);
+      await axios.post('https://mini-crmb.onrender.com/api/orders', newOrder);
       alert('Order added');
       setNewOrder({ customerId: '', amount: 0, items: [{ name: '', quantity: 1, price: 0 }] });
       fetchOrders();
@@ -109,7 +109,7 @@ const OrdersPage = () => {
   const handleDeleteOrder = async (id) => {
     if (!window.confirm('Are you sure you want to delete this order?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/orders/${id}`);
+      await axios.delete(`https://mini-crmb.onrender.com/api/orders/${id}`);
       fetchOrders();
     } catch (err) {
       console.error(err);
@@ -166,7 +166,7 @@ const OrdersPage = () => {
       return;
     }
     try {
-      await axios.put(`http://localhost:5000/api/orders/${editOrder._id}`, editOrder);
+      await axios.put(`https://mini-crmb.onrender.com/api/orders/${editOrder._id}`, editOrder);
       alert('Order updated');
       setEditOrder(null);
       fetchOrders();
@@ -373,71 +373,3 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
-
-
-
-
-
-
-
-
-
-
-
-
-// const [filters, setFilters] = useState({
-//   email: '',
-//   startDate: '',
-//   endDate: '',
-//   minAmount: '',
-//   maxAmount: ''
-// });
-
-// const fetchOrders = async (filterParams = {}) => {
-//   const query = new URLSearchParams(filterParams).toString();
-//   const res = await axios.get(`http://localhost:5000/api/orders?${query}`);
-//   setOrders(res.data);
-// };
-
-// useEffect(() => {
-//   fetchOrders();
-// }, []);
-
-// const handleFilterChange = (field, value) => {
-//   const newFilters = { ...filters, [field]: value };
-//   setFilters(newFilters);
-//   fetchOrders(newFilters);
-// };
-
-// return (
-//   <div className="filters">
-//     <input
-//       type="text"
-//       placeholder="Search by customer email"
-//       value={filters.email}
-//       onChange={(e) => handleFilterChange('email', e.target.value)}
-//     />
-//     <input
-//       type="text"
-//       value={filters.startDate}
-//       onChange={(e) => handleFilterChange('startDate', e.target.value)}
-//     />
-//     <input
-//       type="date"
-//       value={filters.endDate}
-//       onChange={(e) => handleFilterChange('endDate', e.target.value)}
-//     />
-//     <input
-//       type="number"
-//       placeholder="Min amount"
-//       value={filters.minAmount}
-//       onChange={(e) => handleFilterChange('minAmount', e.target.value)}
-//     />
-//     <input
-//       type="number"
-//       placeholder="Max amount"
-//       value={filters.maxAmount}
-//       onChange={(e) => handleFilterChange('maxAmount', e.target.value)}
-//     />
-//   </div>
-// );

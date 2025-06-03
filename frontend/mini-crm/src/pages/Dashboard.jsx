@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/campaigns").then((res) => {
+    axios.get("https://mini-crmb.onrender.com/campaigns").then((res) => {
       setCampaigns(res.data);
     });
   }, []);

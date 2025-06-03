@@ -21,7 +21,7 @@ function App() {
   const [loading, setLoading] = useState(true); // track fetch status
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/me', {
+    fetch('https://mini-crmb.onrender.com/api/me', {
       credentials: 'include',
     })
       .then(res => res.ok ? res.json() : null)
@@ -62,9 +62,9 @@ function App() {
 {/* <Route path="/login" element={<Login />} /> */}
 <Route path="/dashboard" element={user ? <DashBoard /> : <Navigate to="/login" />} />
 
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/segments" element={<SegmentForm />} />
-        <Route path="/campaigns" element={<Campaigns />} />
+        <Route path="/orders" element={user ? <OrdersPage /> :<Navigate to="/login" />} />
+        <Route path="/segments" element={user ? <SegmentForm /> : <Navigate to="/login" />} />
+        <Route path="/campaigns" element={user ? <Campaigns />:<Navigate to="/login" />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login-success" element={<LoginSuccess />} />

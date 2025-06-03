@@ -6,7 +6,7 @@ export default function LoginSuccess() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/me', {
+    fetch('https://mini-crmb.onrender.com/api/me', {
       credentials: 'include',
     })
       .then(res => {
