@@ -131,7 +131,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     // Successful login, redirect where chahiye
     // res.redirect('http://localhost:5173/');
-    res.redirect('http://localhost:5173/login-success');
+    res.redirect('https://mini-crm-edgj.onrender.com/login-success');
   });
 
   app.get('/api/me', (req, res) => {
