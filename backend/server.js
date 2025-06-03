@@ -39,14 +39,26 @@ app.use(express.json());
 //   saveUninitialized: false,
 // }));
 
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || 'defaultSecretForDevOnly',
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: false, // set to true if using https
+//     httpOnly: true,
+//     sameSite: 'lax'
+//   }
+// }));
+
+
 app.use(session({
   secret: process.env.SESSION_SECRET || 'defaultSecretForDevOnly',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // set to true if using https
+    secure: true,       // MUST be true for HTTPS
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: 'none'    // allow cross-site cookies
   }
 }));
 
