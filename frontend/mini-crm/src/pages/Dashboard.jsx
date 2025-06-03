@@ -22,6 +22,8 @@ export default function Dashboard() {
   useEffect(() => {
     axios.get("https://mini-crmb.onrender.com/campaigns").then((res) => {
       setCampaigns(res.data);
+      console.log("ye camp hai",res.data);
+      
     });
   }, []);
 
